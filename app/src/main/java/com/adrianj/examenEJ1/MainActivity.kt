@@ -1,5 +1,6 @@
 package com.adrianj.examenEJ1
 
+import android.media.Image
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -23,7 +24,11 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             ExamenEJ1Theme {
-                principal()
+                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                    principal(
+                        modifier = Modifier.padding(innerPadding)
+                    )
+                }
             }
         }
     }
@@ -31,7 +36,12 @@ class MainActivity : ComponentActivity() {
 
 @Preview
 @Composable
-fun principal() {
+fun prevprin(){
+    principal()
+}
+
+@Composable
+fun principal(modifier: Modifier = Modifier) {
     var productos = listOf(
         Productos(
             "Producto 1",
@@ -51,7 +61,14 @@ fun principal() {
     )
     LazyColumn(modifier = Modifier.padding(all = 13.dp)) {
         item {
-            productos
+            mostrarProductos()
         }
     }
+}
+
+@Composable
+fun mostrarProductos(nombre: String, precio: Double, image: Image){
+    Text(text = nombre)
+    Text(text = precio.toString())
+    Image(image)
 }
